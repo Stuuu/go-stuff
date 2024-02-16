@@ -1,0 +1,28 @@
+package hello
+
+import "testing"
+
+func TestSayHello(t *testing.T) {
+	subtests := []struct {
+		items  []string
+		result string
+	}{
+		{
+			result: "Hello, world!",
+		},
+		{
+			items:  []string{"Matt"},
+			result: "Hello, Matt!",
+		},
+		{
+			items:  []string{"Matt", "Sarah"},
+			result: "Hello, Matt, Sarah!",
+		},
+	}
+
+	for _, st := range subtests {
+		if s := Say(st.items); s != st.result {
+			t.Errorf("Wanted %s (%v), got %s", st.result, st.items, s)
+		}
+	}
+}
