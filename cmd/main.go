@@ -1,29 +1,26 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 	"strings"
 )
 
 func main() {
-	s := "a string"
+	if len(os.Args) < 3 {
+		fmt.Fprintln(os.Stderr, "not enough args")
+		os.Exit(-1)
+	}
 
-	x := len(s)
+	old, new := os.Args[1], os.Args[2]
+	scan := bufio.NewScanner(os.Stdin)
 
-	fmt.Println(x)
+	for scan.Scan() {
+		s := strings.Split(scan.Text(), old)
+		t := strings.Join(s, new)
 
-	g := strings.Contains(s, "g")
-	fmt.Println(g)
-	l := strings.Contains(s, "x")
-	fmt.Println(l)
-
-	h := strings.HasPrefix(s, "a")
-	fmt.Println(h)
-
-	i := strings.Index(s, "string")
-	fmt.Println(i)
-
-	s = strings.ToUpper(s)
-	fmt.Println(s)
+		fmt.Println(t)
+	}
 
 }
