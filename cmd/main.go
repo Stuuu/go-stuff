@@ -1,26 +1,14 @@
 package main
 
-import (
-	"bufio"
-	"fmt"
-	"os"
-	"strings"
-)
+import "fmt"
 
 func main() {
-	if len(os.Args) < 3 {
-		fmt.Fprintln(os.Stderr, "not enough args")
-		os.Exit(-1)
-	}
 
-	old, new := os.Args[1], os.Args[2]
-	scan := bufio.NewScanner(os.Stdin)
+	t := []byte("string")
 
-	for scan.Scan() {
-		s := strings.Split(scan.Text(), old)
-		t := strings.Join(s, new)
-
-		fmt.Println(t)
-	}
-
+	fmt.Println(len(t), t)
+	fmt.Println(t[2])
+	fmt.Println(t[:2])
+	fmt.Println(t[2:])
+	fmt.Println(t[3:5], len(t[3:5]))
 }
