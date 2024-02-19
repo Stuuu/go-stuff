@@ -1,12 +1,30 @@
 package main
 
-func main() {
-	const (
-		a       = 1
-		b       = 2 * 1024
-		c       = b << 3
-		g uint8 = 0x07
-		h uint8 = g & 0x03
-	)
+import (
+	"fmt"
+	"os"
+)
 
+func main() {
+	var sum float64
+	var n int
+
+	for {
+		var val float64
+
+		_, err := fmt.Fscanln(os.Stdin, &val)
+		if err != nil {
+			break
+		}
+
+		sum += val
+		n++
+	}
+
+	if n == 0 {
+		fmt.Fprintln(os.Stderr, "no values")
+		os.Exit(-1)
+	}
+
+	fmt.Println("The average is", sum/float64(n))
 }
