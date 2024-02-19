@@ -1,18 +1,12 @@
 package main
 
-import "fmt"
-
 func main() {
-	a := 2
-	b := 3.1
+	const (
+		a       = 1
+		b       = 2 * 1024
+		c       = b << 3
+		g uint8 = 0x07
+		h uint8 = g & 0x03
+	)
 
-	fmt.Printf("a: %8T %[1]v\n", a)
-	fmt.Printf("b: %8T %[1]v\n", b)
-
-	a = int(b)
-
-	fmt.Printf("a: %8T %[1]v\n", a)
-
-	b = float64(a)
-	fmt.Printf("b: %8T %[1]v\n", b)
 }
