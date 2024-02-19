@@ -1,28 +1,29 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
-	s := "élite"
+	s := "a string"
 
-	fmt.Printf("%8T %[1]v %d\n", s, len(s))
-	fmt.Printf("%8T %[1]v\n", []rune(s))
-	b := []byte(s)
-	fmt.Printf("%8T %[1]v %d\n", b, len(b))
+	x := len(s)
 
-	s2 := "the quick brown fox"
+	fmt.Println(x)
 
-	a := len(s2)
-	fmt.Println(a)
-	b2 := s2[:3]
-	fmt.Println(b2)
-	c := s2[4:9]
-	fmt.Println(c)
-	d := s2[:4] + "slow" + s2[9:]
-	fmt.Println(d)
+	g := strings.Contains(s, "g")
+	fmt.Println(g)
+	l := strings.Contains(s, "x")
+	fmt.Println(l)
 
-	s2 += "es"
+	h := strings.HasPrefix(s, "a")
+	fmt.Println(h)
 
-	fmt.Println(s2)
+	i := strings.Index(s, "string")
+	fmt.Println(i)
+
+	s = strings.ToUpper(s)
+	fmt.Println(s)
 
 }
