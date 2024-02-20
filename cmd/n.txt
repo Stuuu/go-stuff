@@ -1,4 +1,8 @@
-matt went to greece
-where did mattgo
-alan went to rome
-matt didn't go there
+Here is some text just to show
+what happens when we split by
+word and to give us something to
+work with
+
+
+This file is not very long but
+it does have some duplicate words

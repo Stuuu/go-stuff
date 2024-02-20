@@ -1,20 +1,21 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
 
 func main() {
-	var s []int
-	var m map[string]int
 
-	l := len(s)
-	fmt.Println(l)
+	scan := bufio.NewScanner(os.Stdin)
+	words := make(map[string]int)
 
-	i, ok := m["int"]
-	fmt.Println(i, ok)
+	scan.Split(bufio.ScanWords)
 
-	for _, v := range s {
-		fmt.Println(v)
+	for scan.Scan() {
+		words[scan.Text()]++
 	}
 
-	// Make the zero value useful - Rob pike
+	fmt.Println(len(words), "unique words")
 }
