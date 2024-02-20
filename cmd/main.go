@@ -3,24 +3,18 @@ package main
 import "fmt"
 
 func main() {
-	p := map[string]int{} // non-nil but empty
+	var s []int
+	var m map[string]int
 
-	a := p["the"] // returns 0
-	fmt.Println(a)
+	l := len(s)
+	fmt.Println(l)
 
-	b, ok := p["and"] // 0, false
+	i, ok := m["int"]
+	fmt.Println(i, ok)
 
-	fmt.Println(b, ok)
-
-	p["the"]++
-
-	c, ok := p["the"] // 1, true
-
-	fmt.Println(c, ok)
-
-	if w, ok := p["the"]; ok {
-		// we know w is not the default value
-		fmt.Println(w)
+	for _, v := range s {
+		fmt.Println(v)
 	}
 
+	// Make the zero value useful - Rob pike
 }
