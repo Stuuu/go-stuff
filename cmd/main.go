@@ -3,16 +3,19 @@ package main
 import "fmt"
 
 func main() {
-	var m map[string]int
-	p := make(map[string]int)
+	var m = map[string]int{
+		"and": 1,
+		"the": 1,
+		"or":  2,
+	}
 
-	a := p["the"]
-	b := m["the"]
-	fmt.Println(a, b)
-	p["and"] = 1 // PANIC - nil map
-	m = p
-	m["and"]++
-	c := p["and"]
+	var n map[string]int
 
-	fmt.Println(m, p, c)
+	// b := m == n   // SYntax Error
+	c := n == nil // true
+	d := len(m)   // 3
+	// e := cap(m)   // Type mismatch you can't ask for the capacity of a map
+
+	fmt.Println(c, d)
+
 }
