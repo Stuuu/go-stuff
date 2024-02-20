@@ -3,19 +3,24 @@ package main
 import "fmt"
 
 func main() {
-	var m = map[string]int{
-		"and": 1,
-		"the": 1,
-		"or":  2,
+	p := map[string]int{} // non-nil but empty
+
+	a := p["the"] // returns 0
+	fmt.Println(a)
+
+	b, ok := p["and"] // 0, false
+
+	fmt.Println(b, ok)
+
+	p["the"]++
+
+	c, ok := p["the"] // 1, true
+
+	fmt.Println(c, ok)
+
+	if w, ok := p["the"]; ok {
+		// we know w is not the default value
+		fmt.Println(w)
 	}
-
-	var n map[string]int
-
-	// b := m == n   // SYntax Error
-	c := n == nil // true
-	d := len(m)   // 3
-	// e := cap(m)   // Type mismatch you can't ask for the capacity of a map
-
-	fmt.Println(c, d)
 
 }
