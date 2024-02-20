@@ -1,41 +1,18 @@
 package main
 
-import (
-	"bufio"
-	"fmt"
-	"os"
-	"sort"
-)
+import "fmt"
 
 func main() {
-
-	scan := bufio.NewScanner(os.Stdin)
-	words := make(map[string]int)
-
-	scan.Split(bufio.ScanWords)
-
-	for scan.Scan() {
-		words[scan.Text()]++
+	a := "a"
+	b := "a"
+	if a == b {
+		fmt.Println("equals")
+	} else {
+		fmt.Println("does not equal")
 	}
 
-	fmt.Println(len(words), "unique words")
-
-	type kv struct {
-		key string
-		val int
+	for i := 0; i < 10; i++ {
+		fmt.Printf("(%d, %d)\n", i, i*i)
 	}
 
-	var ss []kv
-
-	for k, v := range words {
-		ss = append(ss, kv{k, v})
-	}
-
-	sort.Slice(ss, func(i, j int) bool {
-		return ss[i].val > ss[j].val
-	})
-
-	for _, s := range ss[:3] {
-		fmt.Println(s.key, "appears", s.val, "times")
-	}
 }
