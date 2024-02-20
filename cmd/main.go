@@ -15,4 +15,14 @@ func main() {
 		fmt.Printf("(%d, %d)\n", i, i*i)
 	}
 
+outer:
+	for {
+		for i := 0; i < 100; i++ {
+			if i == 23 {
+				break outer
+			}
+			fmt.Println(i)
+		}
+	}
+
 }
