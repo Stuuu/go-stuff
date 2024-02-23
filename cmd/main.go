@@ -15,10 +15,13 @@ func main() {
 			continue
 		}
 
-		if _, err := io.Copy(os.Stdout, file); err != nil {
+		data, err := io.ReadAll(file)
+		if err != nil {
 			fmt.Fprint(os.Stderr, err)
 			continue
 		}
+
+		fmt.Println("The file has", len(data), "bytes")
 
 		file.Close()
 
