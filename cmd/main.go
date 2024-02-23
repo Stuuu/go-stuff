@@ -3,11 +3,12 @@ package main
 import "fmt"
 
 func main() {
+	a, b := 12, 345
+	c, d := 1.2, 3.45
 
-	n, err := fmt.Println("Hello, playground")
-	fmt.Println(err)
+	fmt.Printf("%d %d\n", a, b)
+	fmt.Printf("%X %X\n", a, b)
+	fmt.Printf("%#x %#x\n", a, b)
+	fmt.Printf("%f %.5f\n", c, d)
 
-	if _, err := fmt.Println(n); err != nil {
-		fmt.Println(err)
-	}
 }
