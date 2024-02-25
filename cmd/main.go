@@ -1,22 +1,17 @@
 package main
 
-import (
-	"fmt"
-	"strconv"
-)
-
-func printLater(s string) {
-
-	fmt.Println(s)
-}
+import "fmt"
 
 func main() {
-	s := "this is getting printed later"
-	defer printLater(s)
+	fmt.Println(doIt())
+}
 
-	for i := 0; i < 100; i++ {
-		s = s + strconv.Itoa(i)
-		defer printLater(s)
-	}
+func doIt() (a int) {
+	defer func() {
+		a = 2
+	}()
 
+	a = 1
+
+	return
 }
