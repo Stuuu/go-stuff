@@ -5,17 +5,26 @@ import (
 )
 
 func main() {
+	a := [...]int{1, 2, 3}
+	b := a[:1]
 
-	u := make([]int, 5)
+	fmt.Println("a = ", a)
+	fmt.Println("b = ", b)
 
-	b := make([]int, 0, 5)
+	c := b[0:2]
 
-	fmt.Println(u)
+	fmt.Println("c = ", c)
 
-	u = append(u, 5)
-	b = append(b, 5)
+	fmt.Println(len(b))
+	fmt.Println(cap(b))
 
-	fmt.Println(u)
-	fmt.Println(b)
+	fmt.Println(len(c))
+	fmt.Println(cap(c))
 
+	d := c[0:1:1] // [i:j:k] len j-i cap k -i
+
+	fmt.Println("d = ", d)
+
+	fmt.Println(len(d))
+	fmt.Println(cap(d))
 }
