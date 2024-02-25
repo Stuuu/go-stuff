@@ -1,34 +1,19 @@
 package main
 
-import (
-	"bufio"
-	"fmt"
-	"os"
-	"strings"
-)
+import "fmt"
+
+func do(b []int) int {
+	b[0] = 0
+	fmt.Printf("b@ %p\n", b)
+	return b[1]
+}
 
 func main() {
-	for _, fname := range os.Args[1:] {
-		var lc, wc, cc int
-		file, err := os.Open(fname)
 
-		if err != nil {
-			fmt.Fprintln(os.Stderr, err)
-			continue
-		}
+	a := []int{1, 2, 3}
 
-		scan := bufio.NewScanner(file)
+	fmt.Printf("a@ %p\n", a)
+	v := do(a)
 
-		for scan.Scan() {
-			s := scan.Text()
-
-			wc += len(strings.Fields(s))
-			cc += len(s)
-			lc++
-		}
-
-		fmt.Printf(" %7d %7d %7d %s\n", lc, wc, cc, fname)
-		file.Close()
-
-	}
+	fmt.Println(a, v)
 }
