@@ -3,16 +3,14 @@ package main
 import "fmt"
 
 func main() {
-	s := make([]func(), 4)
+	var s []int
 
-	for i := 0; i < 4; i++ {
-		i2 := i // closure capture
-		s[i] = func() {
-			fmt.Printf("%d @ %p\n", i2, &i2)
-		}
-	}
+	t := []int{}
+	u := make([]int, 5)
+	v := make([]int, 0, 5)
 
-	for i := 0; i < 4; i++ {
-		s[i]()
-	}
+	fmt.Printf("%d, %d, %T, %5t, %#[3]v\n", len(s), cap(s), s, s == nil)
+	fmt.Printf("%d, %d, %T, %5t, %#[3]v\n", len(t), cap(t), t, t == nil)
+	fmt.Printf("%d, %d, %T, %5t, %#[3]v\n", len(u), cap(u), u, u == nil)
+	fmt.Printf("%d, %d, %T, %5t, %#[3]v\n", len(v), cap(v), v, v == nil)
 }
