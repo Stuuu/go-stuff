@@ -7,24 +7,19 @@ import (
 func main() {
 	a := [...]int{1, 2, 3}
 	b := a[:1]
+	c := b[0:2:2]
 
-	fmt.Println("a = ", a)
-	fmt.Println("b = ", b)
+	// all the same address
+	fmt.Printf("a[%p] = %v\n", &a, a)
+	fmt.Printf("b[%p] = %[1]v\n", b)
+	fmt.Printf("c[%p] = %[1]v\n", c)
 
-	c := b[0:2]
+	c[0] = 9
+	fmt.Printf("a[%p] = %v\n", &a, a)
+	fmt.Printf("c[%p] = %[1]v\n", c)
 
-	fmt.Println("c = ", c)
+	c = append(c, 5)
+	fmt.Printf("a[%p] = %v\n", &a, a)
+	fmt.Printf("c[%p] = %[1]v\n", c)
 
-	fmt.Println(len(b))
-	fmt.Println(cap(b))
-
-	fmt.Println(len(c))
-	fmt.Println(cap(c))
-
-	d := c[0:1:1] // [i:j:k] len j-i cap k -i
-
-	fmt.Println("d = ", d)
-
-	fmt.Println(len(d))
-	fmt.Println(cap(d))
 }
