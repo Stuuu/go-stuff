@@ -1,20 +1,22 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
-func do(m1 *map[int]int) {
-	(*m1)[3] = 0
+func printLater(s string) {
 
-	(*m1) = make(map[int]int)
-	(*m1)[4] = 4
-	fmt.Println("m1", *m1)
-
+	fmt.Println(s)
 }
 
 func main() {
-	m := map[int]int{4: 1, 7: 2, 8: 3}
+	s := "this is getting printed later"
+	defer printLater(s)
 
-	fmt.Println("m", m)
-	do(&m)
-	fmt.Println("m", m)
+	for i := 0; i < 100; i++ {
+		s = s + strconv.Itoa(i)
+		defer printLater(s)
+	}
+
 }
