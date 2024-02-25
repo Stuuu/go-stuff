@@ -1,25 +1,58 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
+	"os"
+	"strings"
+
+	"golang.org/x/net/html"
 )
 
+var raw = `
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>My First Heading</h1>
+      <p>My first paragraph.</p>
+      <img src="xxx.jpg" width="104" height="142">
+      <p>HTML <a href="https://www.w3schools.com/html/html_images.asp">images</a> are defined with the img tag:</p>
+      <img src="xxx.jpg" width="104" height="142">
+  </body>
+</html>`
+
 func main() {
-	a := [...]int{1, 2, 3}
-	b := a[:1]
-	c := b[0:2:2]
 
-	// all the same address
-	fmt.Printf("a[%p] = %v\n", &a, a)
-	fmt.Printf("b[%p] = %[1]v\n", b)
-	fmt.Printf("c[%p] = %[1]v\n", c)
+	doc, err := html.Parse(bytes.NewReader([]byte(raw)))
 
-	c[0] = 9
-	fmt.Printf("a[%p] = %v\n", &a, a)
-	fmt.Printf("c[%p] = %[1]v\n", c)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "parse failed: %s\n", err)
+	}
 
-	c = append(c, 5)
-	fmt.Printf("a[%p] = %v\n", &a, a)
-	fmt.Printf("c[%p] = %[1]v\n", c)
+	words, pics := countWordsAndImages(doc)
 
+	fmt.Printf("%d words and %d images\n", words, pics)
+
+}
+
+func visit(n *html.Node, words, pics *int) {
+
+	if n.Type == html.TextNode {
+		*words += len(strings.Fields(n.Data))
+	} else if n.Type == html.ElementNode && n.Data == "img" {
+		*pics++
+	}
+
+	for c := n.FirstChild; c != nil; c = c.NextSibling {
+		visit(c, words, pics)
+	}
+
+}
+
+func countWordsAndImages(doc *html.Node) (int, int) {
+	var words, pics int
+
+	visit(doc, &words, &pics)
+
+	return words, pics
 }
