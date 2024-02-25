@@ -1,16 +1,27 @@
 package main
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 func main() {
-	var s []int
+	var a []int
 
-	t := []int{}
-	u := make([]int, 5)
-	v := make([]int, 0, 5)
+	j1, _ := json.Marshal(a)
+	fmt.Println(string(j1)) // null
 
-	fmt.Printf("%d, %d, %T, %5t, %#[3]v\n", len(s), cap(s), s, s == nil)
-	fmt.Printf("%d, %d, %T, %5t, %#[3]v\n", len(t), cap(t), t, t == nil)
-	fmt.Printf("%d, %d, %T, %5t, %#[3]v\n", len(u), cap(u), u, u == nil)
-	fmt.Printf("%d, %d, %T, %5t, %#[3]v\n", len(v), cap(v), v, v == nil)
+	if j1 == nil {
+		fmt.Println("j1 is nil")
+	}
+
+	b := []int{}
+
+	j2, _ := json.Marshal(b)
+	fmt.Println(string(j2)) // []
+
+	if j2 == nil {
+		fmt.Println("j2 is nil")
+	}
+
 }
