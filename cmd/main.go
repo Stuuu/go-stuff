@@ -6,12 +6,8 @@ func main() {
 	fmt.Println(doIt())
 }
 
-func doIt() (a int) {
-	defer func() {
-		a = 2
-	}()
+func doIt() *int {
+	var b int
 
-	a = 1
-
-	return
+	return &b
 }
