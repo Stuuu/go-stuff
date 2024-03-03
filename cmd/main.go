@@ -13,11 +13,17 @@ type Employee struct {
 }
 
 func main() {
-	var e Employee
+	e := Employee{
+		Name:   "Matt",
+		Number: 1,
+		Hired:  time.Now(),
+	}
 
-	e.Name = "Matt"
-	e.Number = 1
-	e.Hired = time.Now()
+	b := Employee{"Lamine", 2, nil, time.Now()}
+
+	e.Boss = &b
 
 	fmt.Printf("%T %+[1]v\n", e)
+	fmt.Printf("%T %+[1]v\n", b)
+	fmt.Println(e.Boss.Name)
 }
