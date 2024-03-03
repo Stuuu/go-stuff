@@ -1,17 +1,26 @@
 package main
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+)
+
+type Response struct {
+	Page  int      `json:"page"`
+	Words []string `json:"words,omitempty"`
+}
 
 func main() {
-	v1 := struct {
-		X int `json:"foo"`
-	}{1}
 
-	v2 := struct {
-		X int `json:"foo"`
-	}{2}
+	r := &Response{Page: 1, Words: []string{"up", "in", "out"}}
+	j, _ := json.Marshal(r)
+	fmt.Printf("%#v\n", r)
+	fmt.Println(string(j))
 
-	v1 = v2
+	var r2 Response
 
-	fmt.Println(v1)
+	_ = json.Unmarshal(j, &r2)
+
+	fmt.Printf("%#v\n", r2)
+
 }
