@@ -1,31 +1,20 @@
 package main
 
-import (
-	"fmt"
-	"time"
-)
-
-type Employee struct {
-	Name   string
-	Number int
-	Boss   *Employee
-	Hired  time.Time
-}
+import "fmt"
 
 func main() {
-
-	c := map[string]*Employee{}
-
-	c["Lamine"] = &Employee{"Lamine", 2, nil, time.Now()}
-	c["Lamine"].Number++
-
-	c["Matt"] = &Employee{
-		Name:   "Matt",
-		Number: 1,
-		Boss:   c["Lamine"],
-		Hired:  time.Now(),
+	var album1 = struct {
+		title string
+	}{
+		"The White Album",
+	}
+	var album2 = struct {
+		title string
+	}{
+		"The Black Album",
 	}
 
-	fmt.Printf("%T %+[1]v\n", c["Matt"])
-	fmt.Printf("%T %+[1]v\n", c["Lamine"])
+	album1 = album2
+
+	fmt.Println(album1, album2)
 }
