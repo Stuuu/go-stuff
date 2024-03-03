@@ -17,6 +17,7 @@ func main() {
 	c := map[string]*Employee{}
 
 	c["Lamine"] = &Employee{"Lamine", 2, nil, time.Now()}
+	c["Lamine"].Number++
 
 	c["Matt"] = &Employee{
 		Name:   "Matt",
