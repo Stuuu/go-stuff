@@ -2,23 +2,16 @@ package main
 
 import "fmt"
 
-type album1 struct {
-	title string
-}
-
-type album2 struct {
-	title string
-}
-
 func main() {
-	var a1 = album1{
-		"The White Album",
-	}
-	var a2 = album2{
-		"The Black Album",
-	}
+	v1 := struct {
+		X int `json:"foo"`
+	}{1}
 
-	a1 = album1(a2)
+	v2 := struct {
+		X int `json:"foo"`
+	}{2}
 
-	fmt.Println(a1, a2)
+	v1 = v2
+
+	fmt.Println(v1)
 }
