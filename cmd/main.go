@@ -18,7 +18,7 @@ func main() {
 		"The Black Album",
 	}
 
-	a1 = a2
+	a1 = album1(a2)
 
 	fmt.Println(a1, a2)
 }
