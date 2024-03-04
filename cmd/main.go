@@ -1,25 +1,20 @@
 package main
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
-type Response struct {
-	Page  int      `json:"page"`
-	words []string `json:"words"`
-}
+import "fmt"
 
 func main() {
 
-	r := &Response{Page: 1}
-	j, _ := json.Marshal(r)
-	fmt.Println(string(j))
-	fmt.Printf("%#v\n", r)
+	things := []int{1, 2, 3, 4, 5, 6, 7}
 
-	var r2 Response
+	for _, thing := range things {
+		thing++
+	}
 
-	fmt.Printf("%#v\n", r2)
-	_ = json.Unmarshal(j, &r2)
+	fmt.Println(things)
 
+	for i := range things {
+		things[i]++
+	}
+
+	fmt.Println(things)
 }
