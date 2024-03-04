@@ -2,22 +2,16 @@ package main
 
 import "fmt"
 
-type user struct {
-	name  string
-	count int
-}
-
-func addTo(u *user) { u.count++ }
-
 func main() {
-	users := []user{{"alice", 0}, {"bob", 0}}
+	items := [][2]byte{{1, 2}, {3, 4}, {5, 6}}
+	a := [][]byte{}
 
-	alice := &users[0] // risky because the slice may get realoccatted
+	for _, item := range items {
+		i := make([]byte, len(item)) // capture
+		copy(i, item[:])             // copy prevents last mem reference from being set for all instances of item
+		a = append(a, i)
+	}
 
-	amy := user{"amy", 1}
-
-	users = append(users, amy)
-
-	addTo(alice)       // alice is likely a stale pointer
-	fmt.Println(users) // so alice's count will be 0
+	fmt.Println(items)
+	fmt.Println(a)
 }
