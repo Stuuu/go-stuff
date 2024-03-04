@@ -2,19 +2,22 @@ package main
 
 import "fmt"
 
+type user struct {
+	name  string
+	count int
+}
+
+func addTo(u *user) { u.count++ }
+
 func main() {
+	users := []user{{"alice", 0}, {"bob", 0}}
 
-	things := []int{1, 2, 3, 4, 5, 6, 7}
+	alice := &users[0] // risky because the slice may get realoccatted
 
-	for _, thing := range things {
-		thing++
-	}
+	amy := user{"amy", 1}
 
-	fmt.Println(things)
+	users = append(users, amy)
 
-	for i := range things {
-		things[i]++
-	}
-
-	fmt.Println(things)
+	addTo(alice)       // alice is likely a stale pointer
+	fmt.Println(users) // so alice's count will be 0
 }
