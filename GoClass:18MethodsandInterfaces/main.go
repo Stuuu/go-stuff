@@ -1,30 +1,26 @@
 package main
 
-import (
-	"fmt"
-	"strconv"
-	"strings"
-)
+import "fmt"
 
-type IntSlice []int
+type Point struct {
+	x, y float64
+}
 
-func (is IntSlice) String() string {
-	var strs []string
-	
-	for _, v := range is {
-		strs = append(strs, strconv.Itoa(v))
-	}
-	
-	return "[" + strings.Join(strs, ";") + "]"
+func (p Point) Offset(x, y float64) Point {
+	return Point{p.x+x, p.y+y}
+}
+
+func (p *Point) Move(x, y float64) {
+	p.x += x
+	p.y += y
 }
 
 func main() {
-	var v IntSlice = []int{1,2,3}
-	var s fmt.Stringer = v
-	
-	for i, x := range v {
-		fmt.Printf("%d: %d\n", i, x)
-	}
-	fmt.Printf("%T %[1]v\n", v)
-	fmt.Printf("%T %[1]v\n", s)
+
+	p1 := Point{1, 2}
+	fmt.Println(p1)
+	p1 =p1.Offset(1, 1)
+	fmt.Println(p1)
+	p1.Move(1,1)
+	fmt.Println(p1)
 }
