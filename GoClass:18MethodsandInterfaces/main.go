@@ -1,26 +1,27 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"io"
+	"os"
+)
 
-type Point struct {
-	x, y float64
-}
+type ByteCounter int
 
-func (p Point) Offset(x, y float64) Point {
-	return Point{p.x+x, p.y+y}
-}
-
-func (p *Point) Move(x, y float64) {
-	p.x += x
-	p.y += y
+func (b *ByteCounter) Write(p []byte) (int, error) {
+	l := len(p)
+	*b += ByteCounter(l)
+	return l, nil
 }
 
 func main() {
-
-	p1 := Point{1, 2}
-	fmt.Println(p1)
-	p1 =p1.Offset(1, 1)
-	fmt.Println(p1)
-	p1.Move(1,1)
-	fmt.Println(p1)
+	var c ByteCounter
+	
+	f1, _ := os.Open("a.txt")
+	f2 := &c 
+	
+	n, _ := io.Copy(f2, f1)
+	
+	fmt.Println("copied", n, "bytes")
+	fmt.Println(c)
 }
