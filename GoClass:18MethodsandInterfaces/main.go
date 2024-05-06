@@ -2,26 +2,45 @@ package main
 
 import (
 	"fmt"
-	"io"
-	"os"
+	"math"
 )
 
-type ByteCounter int
-
-func (b *ByteCounter) Write(p []byte) (int, error) {
-	l := len(p)
-	*b += ByteCounter(l)
-	return l, nil
+type Point struct {
+	X, Y float64
 }
 
+type Line struct {
+	Begin, End Point
+}
+
+type Path []Point
+
+func (l Line) Distance() float64 {
+	return math.Hypot(l.End.X - l.Begin.X, l.End.Y - l.Begin.Y)
+}
+
+func (p Path) Distance() (sum float64) {
+	for i:= 1; i < len(p); i++ {
+		sum += Line{p[i-1], p[i]}.Distance()
+	}
+	
+	return sum
+}
+
+type Distancer interface {
+	Distance() float64
+}
+
+func PrintDistance(d Distancer) {
+	fmt.Println(d.Distance())
+}
+
+
 func main() {
-	var c ByteCounter
+	side := Line{Point{1,3}, Point{4,6}}
+	perimeter := Path{{1,1}, {5,1},{5,4}, {1,1}}
 	
-	f1, _ := os.Open("a.txt")
-	f2 := &c 
-	
-	n, _ := io.Copy(f2, f1)
-	
-	fmt.Println("copied", n, "bytes")
-	fmt.Println(c)
+	PrintDistance(side)
+	PrintDistance(perimeter)
+
 }
