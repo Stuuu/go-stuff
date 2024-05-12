@@ -2,42 +2,35 @@ package main
 
 import (
 	"fmt"
-	"path/filepath"
+	"sort"
 )
 
-type Pair struct {
-	Path string
-	Hash string
+type Organ struct {
+	Name   string
+	Weight int
 }
 
-func (p Pair) String() string {
-	return fmt.Sprintf("Hash of %s is %s", p.Path, p.Hash)
+type Organs []Organ
+
+func (s Organs) Len() int      { return len(s) }
+func (s Organs) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+
+type ByName struct{ Organs }
+type ByWeight struct{ Organs }
+
+func (s ByName) Less(i, j int) bool {
+	return s.Organs[i].Name < s.Organs[j].Name
 }
-
-func (p PairWithLength) String() string {
-
-	return fmt.Sprintf("Hash of %s is %s; length %d", p.Path, p.Hash, p.Length)
-}
-
-type PairWithLength struct {
-	Pair
-	Length int
-}
-
-func (p Pair) Filename() string {
-	return filepath.Base(p.Path)
-}
-
-type Filenamer interface {
-	Filename() string
+func (s ByWeight) Less(i, j int) bool {
+	return s.Organs[i].Weight < s.Organs[j].Weight
 }
 
 func main() {
-	p := Pair{"/usr", "0xfdfe"}
-
-	var fn Filenamer = PairWithLength{Pair{"/usr/lib", "0xdead"}, 133}
-	fmt.Println(p)
-	fmt.Println(fn)
-
-	fmt.Println(p.Filename())
+	s := []Organ{{"brain", 1340}, {"liver", 1494}, {"spleen", 162}, {"pancreas", 131}, {"heart", 290}}
+	
+	sort.Sort(ByWeight{s})
+	fmt.Println(s)
+	sort.Sort(ByName{s})
+	sort.Sort(sort.Reverse(ByName{s}))
+	fmt.Println(s)
 }
