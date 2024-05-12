@@ -1,32 +1,17 @@
 package main
 
-import (
-	"fmt"
-)
-
-type StringStack struct {
-	data []string
+type IntList struct {
+	Value int
+	Tail *IntList
 }
 
-func (s *StringStack) Push(x string) {
-	s.data = append(s.data, x)
-}
-
-func (s *StringStack) Pop() string {
-	if l := len(s.data); l > 0 {
-		t := s.data[l-1]
-		s.data = s.data[:l-1]
-		return t
+func (list *IntList) Sum() int {
+	if list == nil {
+		return 0
 	}
-	
-	panic("pop from empty stack")
+	return list.Value + list.Tail.Sum()
 }
+
 func main() {
 
-	stack := StringStack{}
-	
-	stack.Push("test1")
-	stack.Push("test2")
-	fmt.Println(stack.Pop())
-	fmt.Println(stack.Pop())
 }
