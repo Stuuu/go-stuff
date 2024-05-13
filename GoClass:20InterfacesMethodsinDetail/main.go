@@ -9,7 +9,7 @@ type Point struct {
 	x, y float64
 }
 
-func (p Point) Distance(q Point) float64 {
+func (p *Point) Distance(q Point) float64 {
 	return math.Hypot(q.x -p.x, q.y - p.y)
 }
 func main() {
@@ -20,7 +20,7 @@ func main() {
 	fmt.Println(p.Distance(q))
 	distanceFromP := p.Distance
 	
-	fmt.Printf("%T\n",distanceFromP)
 	
+	p = Point{2, 2}
 	fmt.Println(distanceFromP(q))
 }
