@@ -1,26 +1,26 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
-type errFoo struct {
-	err error
-	path string
+type Point struct {
+	x, y float64
 }
 
-func (e errFoo) Error() string {
-	return fmt.Sprintf("%s: %s", e.path, e.err)
+func (p Point) Distance(q Point) float64 {
+	return math.Hypot(q.x -p.x, q.y - p.y)
 }
-
-func XYZ(a int) error {
-	return nil
-}
-
 func main() {
-	var err error = XYZ(1) // BAD: interface gets a nil concrete pointer
+	p := Point{1, 1}
+	q := Point{5, 4}
 	
-	if err != nil {
-		fmt.Println("oops")
-	} else {
-		fmt.Println("OK!")
-	}
+
+	fmt.Println(p.Distance(q))
+	distanceFromP := p.Distance
+	
+	fmt.Printf("%T\n",distanceFromP)
+	
+	fmt.Println(distanceFromP(q))
 }
